@@ -6,12 +6,16 @@ import 'package:legalaid/style/text_style.dart';
 
 import '../../res/color_resource.dart';
 
+typedef PageCallback = void Function(StatefulWidget);
 class CustomNavDrawer extends StatefulWidget {
-  const CustomNavDrawer({Key? key}) : super(key: key);
+
+  PageCallback pageCallback;
+  CustomNavDrawer({Key? key,required this.pageCallback}) : super(key: key);
 
   @override
   State<CustomNavDrawer> createState() => _CustomNavDrawerState();
 }
+
 
 class _CustomNavDrawerState extends State<CustomNavDrawer> {
 
@@ -55,7 +59,9 @@ class _CustomNavDrawerState extends State<CustomNavDrawer> {
                   leading: Icon(NavText.navItems[index-1].icon,color: NavText.navItems[index-1].itemColor,),
                   title: Text(NavText.navItems[index-1].text,style: NavText.navItems[index-1].getTextStyle(),),
                   onTap: () => {
-                    setState((){clickNavbarItem(index);})
+                    widget.pageCallback.call(NavText.navItems[index-1].page),
+                    setState((){clickNavbarItem(index);}),
+                    Navigator.of(context).pop()
                   },
                 ),
               ),

@@ -56,8 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.only(top: SizeResource.xxlargeDp),
                     child: ElevatedButton(
                         onPressed: (){
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              "/Home", (Route<dynamic> route)=>false);
+                          Navigator.pushNamedAndRemoveUntil(context, '/Home', (route) => false);
                         },
                         style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(SizeResource.smallDp),
