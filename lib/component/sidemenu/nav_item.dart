@@ -7,8 +7,9 @@ class NavItem {
   Color itemColor;
   String text;
   IconData icon;
+  StatefulWidget page;
 
-  NavItem({required this.backgroundColor,required this.text,required this.icon,required this.itemColor});
+  NavItem({required this.backgroundColor,required this.text,required this.icon,required this.itemColor,required this.page});
 
   void select(){
     backgroundColor = Colors.white;

@@ -30,6 +30,11 @@ class LegalAidTextStyle{
       fontWeight: FontWeight.w500,
       color: Colors.black
   );
+  static var foodListMenuSubTextGray = const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: Colors.grey
+  );
   static var foodListMenuSubTextWhite = const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
