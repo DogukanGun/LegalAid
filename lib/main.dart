@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legalaid/feature/home/home_page.dart';
 import 'package:legalaid/feature/login/login_page.dart';
+import 'package:legalaid/res/color_resource.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         '/Login':(BuildContext context)=>const LoginPage()
       },
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: ColorResource.navbarColor,
       ),
       home: const LoginPage()
     );
