@@ -6,6 +6,8 @@ import 'package:legalaid/feature/login/domain/register_user_cubit.dart';
 import 'package:legalaid/feature/login/login_texts.dart';
 import 'package:legalaid/res/color_resource.dart';
 import 'package:legalaid/res/size_resource.dart';
+import 'package:legalaid/service/sessionmanager/legalaid_session_key.dart';
+import 'package:legalaid/service/sessionmanager/legalaid_session_manager.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 import '../../style/text_style.dart';
@@ -32,7 +34,10 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocBuilder<RegisterUserCubit,RegisterState>(
         builder: (context, state) {
           if(state == RegisterState.Success){
-            Navigator.pushNamedAndRemoveUntil(context, '/Home', (route) => false);
+            WidgetsBinding.instance.addPostFrameCallback((_){
+              SessionManager.putData(LegalAidSessionKey.LOGIN.name, true);
+              Navigator.pushNamedAndRemoveUntil(context, '/Home', (route) => false);
+            });
           }
           return Stack(
             children: [

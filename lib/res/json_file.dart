@@ -1,0 +1,712 @@
+class JsonFile {
+  static var input = """
+  {
+  "Person": [
+  {
+  "id": 1,
+  "question": "Name",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 2
+  }
+  },
+  {
+  "id": 2,
+  "question": "Vorname",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 3
+  }
+  },
+  {
+  "id": 3,
+  "question": "Geburtsname",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 4
+  }
+  },
+  {
+  "id": 4,
+  "question": "Geburtsdatum",
+  "explanation": "",
+  "control": {
+  "type": "date",
+  "next_id": 5
+  }
+  },
+  {
+  "id": 5,
+  "question": "Straße",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 6
+  }
+  },
+  {
+  "id": 6,
+  "question": "Hausnummer",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 7
+  }
+  },
+  {
+  "id": 7,
+  "question": "Postleitzahl",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 8
+  }
+  },
+  {
+  "id": 8,
+  "question": "Wohnort",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 9
+  }
+  },
+  {
+  "id": 9,
+  "question": "Telefonnummer",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 10
+  }
+  },
+  {
+  "id": 10,
+  "question": "Wie lautet dein Familienstand?",
+  "explanation": "",
+  "control": {
+  "type": "single_choice",
+  "name": "familienstand",
+  "options": [
+  {
+  "id": 1,
+  "value": "ledig",
+  "next_id": 11
+  },
+  {
+  "id": 2,
+  "value": "verheiratet",
+  "next_id": 11
+  },
+  {
+  "id": 3,
+  "value": "verwitwet",
+  "next_id": 11
+  },
+  {
+  "id": 4,
+  "value": "geschieden",
+  "next_id": 11
+  },
+  {
+  "id": 5,
+  "value": "geschieden",
+  "next_id": 11
+  },
+  {
+  "id": 6,
+  "value": "eingetragene Lebenspartnerschaft",
+  "next_id": 11
+  },
+  {
+  "id": 7,
+  "value": "eingetragene Lebenspartnerin/eingetragener Lebenspartner verstorben",
+  "next_id": 11
+  },
+  {
+  "id": 8,
+  "value": "eingetragene Lebenspartnerschaft aufgehoben",
+  "next_id": 11
+  }
+  ]
+  }
+  },
+  {
+  "id": 11,
+  "question": "Hast du einen gesetzlichen Vertreter?",
+  "explanation": "Gesetzliche Vertretung bezieht sich auf die Möglichkeit für eine Person, im Namen und im Auftrag einer anderen Person zu handeln. Dies kann notwendig sein, wenn die betroffene Person zu jung ist, um selbst Entscheidungen zu treffen, oder wenn sie aufgrund einer Beeinträchtigung oder einer Erkrankung nicht in der Lage ist, ihre Angelegenheiten selbst zu regeln. Die Person mit gesetzlicher Vertretungsmacht hat die Verantwortung, im besten Interesse der Person zu handeln, für die sie handelt, und ihre Angelegenheiten sorgfältig und verantwortungsbewusst zu regeln.",
+  "control": {
+  "type": "single_choice",
+  "name": "vertreter",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 12
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 19
+  }
+  ]
+  }
+  },
+  {
+  "id": 12,
+  "question": "Was ist der Vorname deines gesetzlichen Vertreters?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 13
+  }
+  },
+  {
+  "id": 13,
+  "question": "Was ist der Nachname deines gesetzlichen Vertreters?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 14
+  }
+  },
+  {
+  "id": 14,
+  "question": "Auf welcher Straße wohnt dein gesetzlicher Vertreter?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 15
+  }
+  },
+  {
+  "id": 15,
+  "question": "In welcher Hausnummer wohnt dein gesetzlicher Vertreter?",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 16
+  }
+  },
+  {
+  "id": 16,
+  "question": "Wie lautet die PLZ deines gesetzlichen Vertreters?",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 17
+  }
+  },
+  {
+  "id": 17,
+  "question": "Wie lautet der Wohnort deines gesetzlichen Vertreters?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 18
+  }
+  },
+  {
+  "id": 18,
+  "question": "Wie lautet die Telefonnummer deines gesetzlichen Vertreters?",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 19
+  }
+  },
+  {
+  "id": 19,
+  "question": "Wie lautet dein Beruf/ deine Erwerbstätigkeit?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 20
+  }
+  },
+  {
+  "id": 20,
+  "question": "Beziehst du laufende Leistungen zum Lebensunterhalt nach dem Zwölften Buch Sozialgesetzbuch (Sozialhilfe)?",
+  "explanation": "",
+  "control": {
+  "type": "single_choice",
+  "name": "vertreter",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 21
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": null
+  }
+  ]
+  }
+  },
+  {
+  "id": 21,
+  "question": "Bitte lade den aktuellen Bescheid der Sozialhilfe einschließlich des Berechnungsbogens vollständig hoch",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": null
+  }
+  }
+  ],
+  "Kostenträger": [
+  {
+  "id": 22,
+  "question": "Trägt eine Rechtsschutzversicherung die Kosten deiner Prozess- oder Verfahrensführung?",
+  "explanation": "Eine Rechtsschutzversicherung ist eine Versicherung, die den Versicherten im Falle von Rechtsstreitigkeiten finanziell absichert, indem sie die Kosten für anwaltliche Beratung, Gerichtsverfahren und andere Rechtsdienstleistungen übernimmt. Das Tragen von Kosten eines Rechtsstreits bezieht sich auf die Verantwortung, die Kosten für ein Gerichtsverfahren oder einen anderen Rechtsstreit zu übernehmen. Diese Kosten können sich aus verschiedenen Posten zusammensetzen, wie z.B. Anwaltskosten, Gerichtskosten und Sachverständigenkosten.",
+  "control": {
+  "type": "single_choice",
+  "name": "rechtsschutz_vollständig",
+  "options": [
+  {
+  "id": 1,
+  "value": "Vollständig",
+  "next_id": 24
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 29
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 25
+  }
+  ]
+  }
+  },
+  {
+  "id": 23,
+  "question": "Trägt eine andere Stelle/ Person die Kosten deiner Prozess- oder Verfahrensführung?",
+  "explanation": "Gewerkschaft, Mieterverein, Sozialverband: Gewerkschaften, Mietervereine und Sozialverbände bieten in bestimmten Fällen finanzielle Unterstützung bei Rechtsstreitigkeiten. Dies kann zum Beispiel im Fall von Arbeitsrechtsstreitigkeiten oder Mietstreitigkeiten der Fall sein. Die Unterstützung kann in Form von finanzieller Hilfe oder kostenloser Rechtsberatung angeboten werden.",
+  "control": {
+  "type": "single_choice",
+  "name": "organisation_vollständig",
+  "options": [
+  {
+  "id": 1,
+  "value": "Vollständig",
+  "next_id": 24
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 29
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 26
+  }
+  ]
+  }
+  },
+  {
+  "id": 24,
+  "question": "HINWEIS: Ein weiteres Ausfüllen ist nicht notwendig. Die Prozesskostenhilfe kann nicht bewilligt werden, wenn eine Rechtsschutzversicherung oder eine andere Stelle die Kosten für einen Rechtsstreit komplett trägt",
+  "explanation": "",
+  "control": {
+  "type": "hint",
+  "next_id": null
+  }
+  },
+  {
+  "id": 25,
+  "question": "In welcher Höhe werden die Kosten von der Versicherung getragen?",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 27
+  }
+  },
+  {
+  "id": 26,
+  "question": "In welcher Höhe werden die Kosten von der Organisation getragen?",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 28
+  }
+  },
+  {
+  "id": 27,
+  "question": "Bitte lade einen Beleg der Versicherung hoch",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": 29
+  }
+  },
+  {
+  "id": 28,
+  "question": "Bitte lade einen Beleg der Mitgliedschaft/ Organisation hoch",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": 29
+  }
+  },
+  {
+  "id": 29,
+  "question": "Kann eine Rechtsschutzversicherung die Kosten deiner Prozess- oder Verfahrensführung stellen?",
+  "explanation": "Wenn eine Rechtsschutzversicherung die Kosten stellt, bedeutet dies, dass sie die Kosten für den Rechtsstreit oder das Verfahren zunächst übernimmt, die aber später zurückgezahlt werden müssen. Die Kostenübernahme durch eine Rechtsschutzversicherung ist in der Regel an bestimmte Bedingungen geknüpft und kann Einschränkungen haben, z.B. hinsichtlich des Versicherungsumfangs oder des Versicherungszeitraums. Es ist daher wichtig, sich im Vorfeld über die genauen Bedingungen und Einschränkungen zu informieren.",
+  "control": {
+  "type": "single_choice",
+  "name": "rechtsschutz_möglich",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 30
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 32
+  }
+  ]
+  }
+  },
+  {
+  "id": 30,
+  "question": "Wie heißt die Versicherung?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 31
+  }
+  },
+  {
+  "id": 31,
+  "question": "Bitte lade einen Beleg der Versicherung hoch",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": 32
+  }
+  },
+  {
+  "id": 32,
+  "question": "Besteht die Mitgliedschaft in einem Verein/ einer Organisation die Kosten deiner Prozess- oder Verfahrensführung stellen kann?",
+  "explanation": "Wenn eine andere Stelle oder Person die Kosten stellt, bedeutet dies, dass sie die Kosten für den Rechtsstreit oder das Verfahren zunächst übernimmt, die aber später zurückgezahlt werden müssen. Die Kostenübernahme durch eine andere Stelle oder Person ist in der Regel an bestimmte Bedingungen geknüpft und kann Einschränkungen haben, z.B. hinsichtlich des Versicherungsumfangs oder des Versicherungszeitraums. Es ist daher wichtig, sich im Vorfeld über die genauen Bedingungen und Einschränkungen zu informieren.",
+  "control": {
+  "type": "single_choice",
+  "name": "organisation_möglich",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 33
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": null
+  }
+  ]
+  }
+  },
+  {
+  "id": 33,
+  "question": "Wie heißt die Verein/ die Organisation?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 34
+  }
+  },
+  {
+  "id": 34,
+  "question": "Bitte lade einen Beleg der Mitgliedschaft/ Organisation hoch",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": null
+  }
+  }
+  ],
+  "Unterhalt": [
+  {
+  "id": 35,
+  "question": "Hast du einen Unterhaltsanspruch gegenüber anderen Personen?",
+  "explanation": "Gesetzliche  Unterhaltspflichten  bestehen  grundsätzlich  zwischen  Verwandten  in  gerader  Linie  (also  etwa  für  Eltern  gegenüber  ihren  Kindern  und  umgekehrt),  zwischen  Ehegatten,  zwischen  eingetragenen  Lebenspartnern  oder  Lebenspartnerinnen  sowie  zwischen  der  nicht  verheirateten  Mutter  und  dem  Kindesvater  nach  der  Geburt  eines  Kindes.  Ein  Unterhaltsanspruch  setzt  weiter  voraus, dass\n- der Unterhaltsberechtigte außerstande ist, sich selbst zu unterhalten, und\n- der Unterhaltsverpflichtete unter Berücksichtigung seiner sonstigen Verpflichtungen wirtschaftlich in der Lage ist, Unterhalt zu leisten.\nAuch volljährige Kinder haben hiernach in der Regel einen gesetzlichen Unterhaltsanspruch gegen die Eltern, solange sie sich noch in der Schul- oder Berufsausbildung bzw. im Studium befinden.",
+  "control": {
+  "type": "single_choice",
+  "name": "unterhaltsanspruch",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 36
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 40
+  }
+  ]
+  }
+  },
+  {
+  "id": 36,
+  "question": "Wie heißt der Unterhaltspflichtige?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 37
+  }
+  },
+  {
+  "id": 37,
+  "question": "Ist der Unterhaltspflichtige dein Ehegatte/eing. Lebenspartner bzw. deine Ehegattin/eingetragene Lebenspartnerin?",
+  "explanation": "",
+  "control": {
+  "type": "single_choice",
+  "name": "unterhalt_lebenspartner",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 40
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 38
+  }
+  ]
+  }
+  },
+  {
+  "id": 38,
+  "question": "Bitte lade ein weiteres Exemplar dieses Formulars mit den persönlichen und wirtschaftlichen Verhältnisse des Unterhaltsverpflichteten hoch, wobei nur die Abschnitte A und D bis J auszufüllen sind.\nFalls die unterhaltsverpflichtete  Person  die  Mitwirkung  ablehnt,  geben  Sie  bitte  den  Grund  der  Weigerung  sowie das an, was Ihnen über deren persönliche und wirtschaftliche Verhältnisse bekannt ist.",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": 40
+  }
+  },
+  {
+  "id": 40,
+  "question": "Gewährst du einer anderen Personen  Bar- oder Naturalunterhalt?",
+  "explanation": "Wenn  Sie  Angehörigen Unterhalt  gewähren,  wird  dies  bei  der  Bewilligung  der  Prozess-  oder  Verfahrenskostenhilfe  berücksichtigt.  Deshalb  liegt  es  in  Ihrem  Interesse,  wenn  Sie  angeben,  welchen   Personen   Sie   Unterhalt   leisten,   egal   ob   Sie   den   Unterhalt   ausschließlich   durch   Geldzahlungen  erbringen  und  ob  die  Personen  eigene  Einnahmen  haben.  Zu  den  eigenen  Einnahmen  einer  Person,  der  Sie  Unterhalt  gewähren,  gehören  auch  Unterhaltszahlungen  eines  Dritten,  insbesondere  diejenigen  des  anderen  Elternteils  für  das  gemeinsame  Kind,  oder  eine  Ausbildungsvergütung, die ein unterhaltsberechtigtes Kind bezieht.",
+  "control": {
+  "type": "single_choice",
+  "name": "unterhalt_gewaehren",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 41
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 53
+  }
+  ]
+  }
+  },
+  {
+  "id": 41,
+  "question": "Was ist der Vorname der Person, der du Unterhalt bezahlst?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 42
+  }
+  },
+  {
+  "id": 42,
+  "question": "Was ist der Nachname der Person, der du Unterhalt bezahlst?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 43
+  }
+  },
+  {
+  "id": 43,
+  "question": "Auf welcher Straße wohnt die Person, der du Unterhalt bezahlst?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 44
+  }
+  },
+  {
+  "id": 44,
+  "question": "In welcher Hausnummer wohnt die Person, der du Unterhalt bezahlst?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 45
+  }
+  },
+  {
+  "id": 45,
+  "question": "Wie lautet die PLZ  der Person, der du Unterhalt bezahlst?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 46
+  }
+  },
+  {
+  "id": 46,
+  "question": "Wie lautet der Wohnort der Person, der du Unterhalt bezahlst?",
+  "explanation": "",
+  "control": {
+  "type": "text",
+  "next_id": 47
+  }
+  },
+  {
+  "id": 47,
+  "question": "In welchem Verhältnis steht die Person, der du Unterhalt bezahlst, zu dir?",
+  "explanation": "",
+  "control": {
+  "type": "single_choice",
+  "name": "unterhalt_verhaeltnis",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ehegatte/-in",
+  "next_id": 48
+  },
+  {
+  "id": 2,
+  "value": "Lebenspartner/-in",
+  "next_id": 48
+  },
+  {
+  "id": 3,
+  "value": "Kind",
+  "next_id": 48
+  },
+  {
+  "id": 4,
+  "value": "Mutter",
+  "next_id": 48
+  },
+  {
+  "id": 5,
+  "value": "Vater",
+  "next_id": 48
+  }
+  ]
+  }
+  },
+  {
+  "id": 48,
+  "question": "Gewährst du den Unterhalt nur in Geldform (Barunterhalt)?",
+  "explanation": "Unterhalt kann in Form von Barunterhalt oder Naturalunterhalt gezahlt werden. Barunterhalt bezieht sich auf den Unterhalt, der in Geldform gezahlt wird. Naturalunterhalt bezieht sich auf den Unterhalt, der in Form von Sachleistungen oder Dienstleistungen gezahlt wird, z.B. indem die Unterhaltspflichtige Person die Wohnkosten übernimmt oder Nahrungsmittel zur Verfügung stellt.",
+  "control": {
+  "type": "single_choice",
+  "name": "barunterhalt",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 49
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 49
+  }
+  ]
+  }
+  },
+  {
+  "id": 49,
+  "question": "Wie hoch ist der Monatsbetrag, den du an die Person, der du Unterhalt bezahlst, zahlst?",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 50
+  }
+  },
+  {
+  "id": 50,
+  "question": "Hat die Person, der du Unterhalt bezahlst, eigene Einnahmen?",
+  "explanation": "",
+  "control": {
+  "type": "single_choice",
+  "name": "unterhalt_eigene_einnahmen",
+  "options": [
+  {
+  "id": 1,
+  "value": "Ja",
+  "next_id": 51
+  },
+  {
+  "id": 2,
+  "value": "Nein",
+  "next_id": 52
+  }
+  ]
+  }
+  },
+  {
+  "id": 51,
+  "question": "Wie hoch sind die monatlichen Einnahmen (netto) von der Person, der du Unterhalt bezahlst?",
+  "explanation": "",
+  "control": {
+  "type": "number",
+  "next_id": 52
+  }
+  },
+  {
+  "id": 52,
+  "question": "Bitte lade einen Beleg des Unterhalts hoch (z. B. Unterhaltstitel, Zahlungsnachweise).",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": 53
+  }
+  },
+  {
+  "id": 53,
+  "question": "Wie willst du das Dokument unterschreiben?",
+  "explanation": "",
+  "control": {
+  "type": "single_choice",
+  "name": "unterschrift",
+  "options": [
+  {
+  "id": 1,
+  "value": "Manuell",
+  "next_id": 54
+  },
+  {
+  "id": 2,
+  "value": "Digital",
+  "next_id": null
+  }
+  ]
+  }
+  },
+  {
+  "id": 54,
+  "question": "Bitte lade das unterschriebene Dokument wieder hoch",
+  "explanation": "",
+  "control": {
+  "type": "upload",
+  "next_id": null
+  }
+  }
+  ]
+}
+""";
+}

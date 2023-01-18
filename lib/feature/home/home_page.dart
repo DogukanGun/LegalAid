@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:legalaid/component/informationbox/information.dart';
 import 'package:legalaid/component/sidemenu/nav_drawer.dart';
 import 'package:legalaid/feature/application/review/application_review.dart';
+import 'package:legalaid/feature/application/startnew/application_startnew.dart';
 import 'package:legalaid/feature/home/home_header.dart';
 import 'package:legalaid/res/size_resource.dart';
 import 'package:legalaid/style/text_style.dart';
@@ -17,7 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  StatefulWidget _currentPage = const ApplicationReview();
+  StatefulWidget _currentPage = const ApplicationStartNew();
 
   void pageCallback(StatefulWidget widget){
     setState((){_currentPage = widget;});

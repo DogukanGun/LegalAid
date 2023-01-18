@@ -1,0 +1,4 @@
+enum InputFieldType{
+  Text,
+  Number
+}
