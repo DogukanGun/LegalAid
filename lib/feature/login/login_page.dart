@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:legalaid/feature/login/data/login_page_status.dart';
 import 'package:legalaid/feature/login/data/user.dart';
 import 'package:legalaid/feature/login/domain/RegisterState.dart';
 import 'package:legalaid/feature/login/domain/register_user_cubit.dart';
 import 'package:legalaid/feature/login/login_texts.dart';
 import 'package:legalaid/res/color_resource.dart';
 import 'package:legalaid/res/size_resource.dart';
+import 'package:legalaid/service/sessionmanager/legalaid_session_key.dart';
+import 'package:legalaid/service/sessionmanager/legalaid_session_manager.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 import '../../style/text_style.dart';
@@ -21,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  LoginPageStatus loginPageStatus = LoginPageStatus.Login;
 
   void login(){
     context.read<RegisterUserCubit>().addUser(User(email: emailController.text, password: passwordController.text));
@@ -32,7 +36,10 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocBuilder<RegisterUserCubit,RegisterState>(
         builder: (context, state) {
           if(state == RegisterState.Success){
-            Navigator.pushNamedAndRemoveUntil(context, '/Home', (route) => false);
+            WidgetsBinding.instance.addPostFrameCallback((_){
+              SessionManager.putData(LegalAidSessionKey.LOGIN.name, true);
+              Navigator.pushNamedAndRemoveUntil(context, '/Home', (route) => false);
+            });
           }
           return Stack(
             children: [
@@ -46,71 +53,81 @@ class _LoginPageState extends State<LoginPage> {
                     pathBackgroundColor: Colors.white   /// Optional, the stroke backgroundColor
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset("asset/legalaidimage.jpg"),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(SizeResource.xxxlargeDp),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                              LoginText.formLoginTitle,
-                              textAlign: TextAlign.center,
-                              style:LegalAidTextStyle.titleBlack
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: SizeResource.xxlargeDp),
-                            child: TextField(
-                              controller: emailController,
-                              decoration: InputDecoration(label:Text(LoginText.formEmailTitle)),
+              Visibility(
+                visible: state != RegisterState.RequestSent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset("asset/legalaidimage.jpg"),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(SizeResource.xxxlargeDp),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                                loginPageStatus == LoginPageStatus.Login ? LoginText.formLoginTitle : LoginText.formRegisterTitle,
+                                textAlign: TextAlign.center,
+                                style:LegalAidTextStyle.titleBlack
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: SizeResource.xxlargeDp),
-                            child: TextField(
-                              controller: passwordController,
-                              obscureText: true,
-                              enableSuggestions: false,
-                              autocorrect: false,
-                              decoration: InputDecoration(label:Text(LoginText.formPasswordTitle)),
+                            Padding(
+                              padding: EdgeInsets.only(top: SizeResource.xxlargeDp),
+                              child: TextField(
+                                controller: emailController,
+                                decoration: InputDecoration(label:Text(LoginText.formEmailTitle)),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: SizeResource.xxlargeDp),
-                            child: ElevatedButton(
-                                onPressed: (){
-                                  login();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.all(SizeResource.smallDp),
-                                    primary: ColorResource.redColor
-                                ),
-                                child: Text(LoginText.loginButton,style:LegalAidTextStyle.foodListMenuTextWhite)
+                            Padding(
+                              padding: EdgeInsets.only(top: SizeResource.xxlargeDp),
+                              child: TextField(
+                                controller: passwordController,
+                                obscureText: true,
+                                enableSuggestions: false,
+                                autocorrect: false,
+                                decoration: InputDecoration(label:Text(LoginText.formPasswordTitle)),
+                              ),
                             ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(top: SizeResource.xxxlargeDp),
-                              child: GestureDetector(
-                                onTap:(){
-                                  setState((){
-
-                                  });
-                                },
-                                child: Text(
-                                  LoginText.registerText,
-                                  textAlign: TextAlign.center,
-                                  style: LegalAidTextStyle.foodListMenuSubTextRed,
-                                ),
-                              )
-                          )
-                        ],
+                            Padding(
+                              padding: EdgeInsets.only(top: SizeResource.xxlargeDp),
+                              child: ElevatedButton(
+                                  onPressed: (){
+                                    login();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      padding: EdgeInsets.all(SizeResource.smallDp),
+                                      primary: ColorResource.redColor
+                                  ),
+                                  child: Text(
+                                      loginPageStatus == LoginPageStatus.Login ? LoginText.loginButton : LoginText.registerButton,
+                                      style:LegalAidTextStyle.foodListMenuTextWhite
+                                  )
+                              ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(top: SizeResource.xxxlargeDp),
+                                child: GestureDetector(
+                                  onTap:(){
+                                    setState((){
+                                      if(loginPageStatus == LoginPageStatus.Login){
+                                        loginPageStatus = LoginPageStatus.Register;
+                                      }else{
+                                        loginPageStatus = LoginPageStatus.Login;
+                                      }
+                                    });
+                                  },
+                                  child: Text(
+                                    loginPageStatus == LoginPageStatus.Login ? LoginText.registerText : LoginText.loginText,
+                                    textAlign: TextAlign.center,
+                                    style: LegalAidTextStyle.foodListMenuSubTextRed,
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ],
           );
