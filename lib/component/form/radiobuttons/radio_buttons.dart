@@ -18,13 +18,13 @@ class _LegalAidRadioButtonsState extends State<LegalAidRadioButtons> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FormTitleWrapper(title: widget.formQuestion.question,),
+        FormTitleWrapper(title: widget.formQuestion.question,explanition: widget.formQuestion.explanation,),
         CustomRadioButton(
             elevation: 0,
             absoluteZeroSpacing: true,
             unSelectedColor: Theme.of(context).canvasColor,
-            buttonLables: widget.formQuestion.questionControl!.options!.map((e) => e.value!).toList(),
-            buttonValues: widget.formQuestion.questionControl!.options!.map((e) => e.value!).toList(),
+            buttonLables: widget.formQuestion.questionControl!.options!.map((e) => e.value!).toSet().toList(),
+            buttonValues: widget.formQuestion.questionControl!.options!.map((e) => e.value!).toSet().toList(),
             buttonTextStyle: const ButtonTextStyle(
                 selectedColor: Colors.white,
                 unSelectedColor: Colors.black,

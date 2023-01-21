@@ -6,8 +6,9 @@ import '../../style/text_style.dart';
 class FormTitleWrapper extends StatelessWidget {
 
   String? title;
+  String? explanition;
 
-  FormTitleWrapper({Key? key,required this.title}) : super(key: key);
+  FormTitleWrapper({Key? key,required this.title,required this.explanition}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +18,13 @@ class FormTitleWrapper extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title != null ? title! : "No Question",
+            title ?? "No Question",
             style: LegalAidTextStyle.titleBlack,
           ),
-          IconButton(onPressed: (){}, icon: const Icon(Icons.question_mark))
+          Tooltip(
+              message: explanition ?? "No Explanition",
+              child: IconButton(onPressed: (){}, icon: const Icon(Icons.question_mark))
+          )
         ],
       ),
     );

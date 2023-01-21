@@ -6,9 +6,10 @@ class TranslateService {
 
   TranslateRepository translateRepository = TranslateRepository();
 
-  Future<String> translate(String text, String language) {
-    var requestBody = TranslationApiRequest(q: text,
-        source: "de",
+  Future<String> translate(String text, String language,String prevLanguage) {
+    var requestBody = TranslationApiRequest(
+        q: text,
+        source: prevLanguage,
         target: language,
         format: "text",
         apiKey: "9ad58d2e-ce1b-43ba-8ea5-ab479d08c2f1"

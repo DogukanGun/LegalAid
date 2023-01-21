@@ -21,6 +21,7 @@ class _FileUploadState extends State<FileUpload> {
       children: [
         FormTitleWrapper(
           title: widget.formQuestion.question,
+          explanition: widget.formQuestion.explanation,
         ),
         SizedBox(
           width: SizeResource.xxxlargeDp,

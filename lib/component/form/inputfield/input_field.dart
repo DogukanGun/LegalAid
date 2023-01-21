@@ -21,7 +21,7 @@ class _LegalAidInputFieldState extends State<LegalAidInputField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FormTitleWrapper(title: widget.formQuestion.question,),
+        FormTitleWrapper(title: widget.formQuestion.question,explanition: widget.formQuestion.explanation,),
         Container(
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,

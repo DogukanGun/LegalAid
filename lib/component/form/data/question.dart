@@ -4,6 +4,8 @@ class FormQuestion{
   int? id;
   String? question;
   String? explanation;
+  bool? questionTranslated = false;
+  bool? questionIsShowed = false;
   QuestionControl? questionControl;
 
   FormQuestion({required this.id,required this.question,required this.explanation,required this.questionControl});
