@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:legalaid/feature/application/startnew/application_startnew_cubit.dart';
+import 'package:legalaid/feature/application/startnew/domain/application_startnew_cubit.dart';
 import 'package:legalaid/feature/application/startnew/translate_cubit.dart';
 import 'package:legalaid/feature/home/home_page.dart';
 import 'package:legalaid/feature/login/domain/register_user_cubit.dart';

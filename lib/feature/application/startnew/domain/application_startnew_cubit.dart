@@ -4,9 +4,9 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legalaid/component/form/data/question.dart';
 import 'package:legalaid/service/translation/language.dart';
-import '../../../service/translation/translate_service.dart';
+import '../../../../service/translation/translate_service.dart';
 
-import '../../../service/formservice/form_service.dart';
+import '../../../../service/formservice/form_service.dart';
 import 'application_startnew_state.dart';
 
 class ApplicationStartnewCubit extends Cubit<ApplicationStartNewState> {

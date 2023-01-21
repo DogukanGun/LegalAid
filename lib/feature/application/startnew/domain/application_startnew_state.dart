@@ -1,5 +1,5 @@
 
-import '../../../component/form/data/question.dart';
+import '../../../../component/form/data/question.dart';
 
 class ApplicationStartNewState{
 

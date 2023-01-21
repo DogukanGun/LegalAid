@@ -7,8 +7,8 @@ import 'package:legalaid/component/form/filefield/file_upload.dart';
 import 'package:legalaid/component/form/inputfield/input_field.dart';
 import 'package:legalaid/component/form/radiobuttons/radio_buttons.dart';
 import 'package:legalaid/component/topictitle/topic_title.dart';
-import 'package:legalaid/feature/application/startnew/application_startnew_cubit.dart';
-import 'package:legalaid/feature/application/startnew/application_startnew_state.dart';
+import 'package:legalaid/feature/application/startnew/domain/application_startnew_cubit.dart';
+import 'package:legalaid/feature/application/startnew/domain/application_startnew_state.dart';
 import 'package:legalaid/res/color_resource.dart';
 import 'package:legalaid/res/size_resource.dart';
 import 'package:legalaid/service/formservice/form_title.dart';
@@ -17,7 +17,7 @@ import 'package:legalaid/service/translation/translate_service.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 import '../../../style/text_style.dart';
-import 'application_startnew_text.dart';
+import 'data/application_startnew_text.dart';
 
 class ApplicationStartNew extends StatefulWidget {
   const ApplicationStartNew({Key? key}) : super(key: key);
@@ -197,10 +197,8 @@ class _ApplicationStartNewState extends State<ApplicationStartNew> with TickerPr
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 5),
-    );
+    controller = AnimationController(vsync: this,);
+    controller.value = 0.33;
     context.read<ApplicationStartnewCubit>().getFormData(titleIndex);
   }
 
@@ -208,10 +206,13 @@ class _ApplicationStartNewState extends State<ApplicationStartNew> with TickerPr
     var newTitleIndex = 0;
     if(title == FormTitle.person){
       newTitleIndex = 0;
+      controller.value = 0.33;
     }else if(title == FormTitle.kostentraeger){
       newTitleIndex = 1;
+      controller.value = 0.66;
     }else if(title == FormTitle.unterhalt){
       newTitleIndex = 2;
+      controller.value = 0.97;
     }
     if(titleIndex != newTitleIndex){
       context.read<ApplicationStartnewCubit>().getFormData(newTitleIndex);
@@ -251,13 +252,16 @@ class _ApplicationStartNewState extends State<ApplicationStartNew> with TickerPr
 
   void _back() {
     var question = questions[currentIndex];
-    var newIndex = 0;
+    var newIndex = -1;
     if (currentIndex != 0) {
       for (int i = 0; i < questions.length; i++) {
         if (questions[i].questionControl?.next_id == question.id) {
           newIndex = i;
         }
       }
+    }
+    if(newIndex == -1){
+      newIndex = currentIndex != 0 ? currentIndex -1 : 0;
     }
     currentIndex = newIndex;
     context

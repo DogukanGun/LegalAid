@@ -1,0 +1,4 @@
+enum LoginPageStatus{
+  Login,
+  Register
+}
