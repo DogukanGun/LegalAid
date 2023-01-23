@@ -17,13 +17,19 @@ class FormTitleWrapper extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title ?? "No Question",
-            style: LegalAidTextStyle.titleBlack,
+          FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Text(
+              title ?? "No Question",
+              style: LegalAidTextStyle.titleBlack,
+            ),
           ),
-          Tooltip(
-              message: explanition ?? "No Explanition",
-              child: IconButton(onPressed: (){}, icon: const Icon(Icons.question_mark))
+          Visibility(
+            visible: explanition?.isNotEmpty == true,
+            child: Tooltip(
+                message: explanition ?? "No Explanition",
+                child: IconButton(onPressed: (){}, icon: const Icon(Icons.question_mark))
+            ),
           )
         ],
       ),

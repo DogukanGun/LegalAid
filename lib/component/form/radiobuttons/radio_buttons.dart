@@ -13,10 +13,15 @@ class LegalAidRadioButtons extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LegalAidRadioButtons> createState() => _LegalAidRadioButtonsState();
+  State<LegalAidRadioButtons> createState() => LegalAidRadioButtonsState();
 }
 
-class _LegalAidRadioButtonsState extends State<LegalAidRadioButtons> {
+class LegalAidRadioButtonsState extends State<LegalAidRadioButtons> {
+
+  String getValue(){
+    return _selectedValue;
+  }
+  String _selectedValue = "";
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,6 +47,7 @@ class _LegalAidRadioButtonsState extends State<LegalAidRadioButtons> {
               textStyle: TextStyle(fontSize: 16)),
           radioButtonValue: (value) {
             print(value);
+            _selectedValue = value.toString();
           },
           customShape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(SizeResource.mediumDp))),
           horizontal: false,

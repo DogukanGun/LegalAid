@@ -10,11 +10,15 @@ class LegalAidInputField extends StatefulWidget {
   LegalAidInputField({Key? key,required this.formQuestion}) : super(key: key);
 
   @override
-  State<LegalAidInputField> createState() => _LegalAidInputFieldState();
+  State<LegalAidInputField> createState() => LegalAidInputFieldState();
 }
 
-class _LegalAidInputFieldState extends State<LegalAidInputField> {
+class LegalAidInputFieldState extends State<LegalAidInputField> {
   var textEditingController = TextEditingController();
+
+  String getValue(){
+    return textEditingController.text;
+  }
 
   @override
   Widget build(BuildContext context) {

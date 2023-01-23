@@ -30,6 +30,12 @@ class _LoginPageState extends State<LoginPage> {
     context.read<RegisterUserCubit>().addUser(User(email: emailController.text, password: passwordController.text));
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
